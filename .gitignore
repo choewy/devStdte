@@ -2,6 +2,8 @@
 
 # dependencies
 scheduler/src/firebase/privacy_key.json
+survey/src/firebase/survey_privacy_key.json
+survey/src/firebase/scheduler_privacy_key.json
 
 # testing
 scheduler/app-dev-version.py
@@ -13,3 +15,5 @@ scheduler/dump
 # production
 scheduler/build
 scheduler/dist
+survey/build
+survey/dist

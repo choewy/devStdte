@@ -1,0 +1,59 @@
+QMainWindow#WindowMainForm {
+    background-color: rgb(255, 255, 255);
+}
+
+QMainWindow#WindowAuthForm {
+    background-color: rgb(25, 25, 90);
+}
+
+QLabel#CentralFooter {
+    color: rgb(150, 150, 150);
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+QLineEdit#AuthInput {
+    height: 40px;
+    width: 320;
+    padding-left: 30px;
+    padding-right: 10px;
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+}
+
+QLabel#AuthLabel-error {
+    font-size: 12px;
+    color: rgb(255, 0, 0);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+QPushButton#AuthButton-login {
+    font-size: 16px;
+    height: 40px;
+    width: 360px;
+    color: rgb(0, 0, 0);
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 5px;
+    background-color: rgb(200, 200, 200);
+}
+
+QPushButton#AuthButton-login:hover {
+    background-color: rgba(200, 200, 200, 80%);
+}
+
+QListWidget#NavBarList {
+    border: 0px;
+    background-color: rgb(25, 25, 90);
+}
+
+QListWidget#NavBarList::item {
+    color: rgb(255, 255, 255);
+    height: 50px;
+}
+
+QLabel#AnswerLabel-icon {
+    border: 1px solid rgba(50, 50, 50);
+    border-radius: 15px;
+}
