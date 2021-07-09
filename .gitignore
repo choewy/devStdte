@@ -1,0 +1,15 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+scheduler/src/firebase/privacy_key.json
+
+# testing
+scheduler/app-dev-version.py
+scheduler/src/modules.json
+scheduler/src/modules.py
+scheduler/app-dump-version.py
+scheduler/dump
+
+# production
+scheduler/build
+scheduler/dist

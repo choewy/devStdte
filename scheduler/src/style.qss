@@ -1,0 +1,398 @@
+QMainWindow {
+    background-color: #ffffff;
+}
+
+QDialog {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(200, 200, 200);
+}
+
+QLabel#CentralFooter {
+    color: rgb(150, 150, 150);
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+QLabel#labelError {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: rgb(255, 0, 0);
+}
+
+QGroupBox#AuthBox {
+    border: none;
+}
+
+QLabel#AuthLogo {
+    margin-bottom: 20px;
+}
+
+QLineEdit#AuthInput-login,
+QLineEdit#AuthInput-signup,
+QLineEdit#AuthInput-signup-check {
+    width: 400px;
+    height: 40px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 3px;
+    padding-right: 10px;
+}
+
+QLineEdit#AuthInput-signup-check {
+    width: 320px;
+}
+
+QLineEdit#AuthInput-login {
+    padding-left: 40px;
+}
+
+QLineEdit#AuthInput-signup,
+QLineEdit#AuthInput-signup-check {
+    padding-left: 10px;
+}
+
+QLabel#AuthLabel-signup {
+    color: rgb(100, 100, 100);
+}
+
+QPushButton#AuthButton-login {
+    width: 440px;
+    height: 40px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(25, 110, 210);
+    border: 1px solid rgb(25, 110, 210);
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+QPushButton#AuthButton-signup {
+    width: 420px;
+    height: 40px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(25, 110, 210);
+    border: 1px solid rgb(25, 110, 210);
+    border-radius: 3px;
+}
+
+QPushButton#AuthButton-login:hover,
+QPushButton#AuthButton-signup:hover {
+    background-color: rgb(43, 129, 214);
+}
+
+QPushButton#AuthButton-cancel {
+    width: 420px;
+    height: 40px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(150, 150, 150);
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 3px;
+}
+
+QPushButton#AuthButton-cancel:hover {
+    background-color: rgb(170, 170, 170);
+}
+
+QPushButton#AuthButton-new {
+    color: rgb(0, 0, 255);
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 255);
+}
+
+QPushButton#AuthButton-check {
+    min-width: 72px;
+    max-width: 72px;
+    height: 40px;
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 3px;
+    background-color: rgb(255, 255, 255);
+}
+
+QPushButton#AuthButton-check:hover {
+    border: 2px solid rgb(200, 200, 200);
+}
+
+QLabel#Header {
+    background-color: rgb(25, 110, 210);
+}
+
+QLabel#HeaderLabel-contents {
+    padding-left: 15px;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+QLabel#TotalLabel {
+    font-size: 12px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+QPushButton#HeaderButton-menu {
+    height: 40px;
+    width: 40px;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+QPushButton#HeaderButton-profile,
+QPushButton#HeaderButton-logout {
+    height: 40px;
+    width: 100px;
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+QPushButton#HeaderButton-menu:hover,
+QPushButton#HeaderButton-profile:hover,
+QPushButton#HeaderButton-logout:hover {
+    background-color: rgb(43, 129, 214);
+}
+
+QListWidget#NavBar {
+    border: none;
+    background-color: rgb(255, 255, 255);
+}
+
+QListWidget#NavBar::item {
+    height: 40px;
+}
+
+QCheckBox#ScheduleCheck-hidden {
+    margin-bottom: 10px;
+}
+
+QListWidget#ScheduleList,
+QListWidget#TotalList {
+    border: none;
+    background-color: rgb(255, 255, 255);
+}
+
+QListWidget#ScheduleList::item,
+QListWidget#TotalList::item {
+    height: 30px;
+}
+
+QTabWidget#ScheduleTab {
+    min-width: 230px;
+    max-width: 230px;
+    background-color: rgb(255, 255, 255);
+}
+
+QTabWidget#ScheduleTab::pane {
+    border: 1px solid rgb(200, 200, 200);
+}
+
+QTabWidget#TotalTab {
+    background-color: rgb(255, 255, 255);
+}
+
+QTabWidget#TotalTab-setting {
+    min-width: 300px;
+    max-width: 300px;
+    background-color: rgb(255, 255, 255);
+}
+
+QTabWidget#TotalTab::pane {
+    padding-top: 7px;
+}
+
+QTabWidget#TotalTab-setting::pane {
+    border: 1px solid rgb(200, 200, 200);
+}
+
+QTableWidget#ScheduleTable,
+QTableWidget#ScheduleTableHeader,
+QTableWidget#TotalTable {
+    color: black;
+    border: 1px solid rgb(200, 200, 200);
+}
+
+QComboBox#ScheduleCombo,
+QComboBox#TotalCombo {
+    min-width: 120px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0);
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 3px;
+}
+
+QPushButton#UserButton-delete,
+QPushButton#TaskButton-new,
+QPushButton#TaskButton-delete,
+QPushButton#TotalButton-run,
+QPushButton#TotalButton-excel,
+QPushButton#ScheduleButton {
+    width: 120px;
+    height: 30px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 3px;
+}
+
+QPushButton#UserButton-delete:hover,
+QPushButton#TaskButton-new:hover,
+QPushButton#TaskButton-delete:hover,
+QPushButton#TotalButton-run:hover,
+QPushButton#TotalButton-excel:hover,
+QPushButton#ScheduleButton:hover {
+    border: 2px solid rgb(200, 200, 200);
+}
+
+QCheckBox#UserCheck,
+QCheckBox#TaskCheck {
+    height: 40px;
+    margin-right: 10px;
+}
+
+QTreeWidget#UserTree,
+QTreeWidget#TaskTree{
+    margin-right: 10px;
+}
+
+QTreeWidget#UserTree::item,
+QTreeWidget#TaskTree::item {
+    height: 36px;
+    font-size: 12px;
+    color: rgb(0, 0, 0);
+}
+
+QPushButton#UserButton-table-save,
+QPushButton#TaskButton-table-save {
+    font-size: 12px;
+    max-height: 30px;
+    min-width: 80px;
+    max-width: 80px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(25, 110, 210);
+    border: 1px solid rgb(25, 110, 210);
+    border-radius: 3px;
+    margin-top:3px;
+    margin-bottom:3px;
+    margin-left:10px;
+    margin-right:10px;
+}
+
+QPushButton#UserButton-table-save:disabled,
+QPushButton#TaskButton-table-save:disabled {
+    color: rgb(0, 0, 0);
+    background-color: rgb(200, 200, 200);
+    border: 1px solid rgb(200, 200, 200);
+}
+
+QPushButton#UserButton-table-save:hover,
+QPushButton#TaskButton-table-save:hover {
+    background-color: rgb(43, 129, 214);
+}
+
+QLineEdit#UserInput-item,
+QComboBox#UserCombo-item,
+QLineEdit#TaskInput-item,
+QComboBox#TaskCombo-item,
+QDateEdit#TaskDate-item {
+    font-size: 12px;
+    max-height: 30px;
+    max-width: 400px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 3px;
+    margin-top: 3px;
+    margin-bottom:3px;
+}
+
+QTextEdit#TaskInput-item {
+    font-size: 12px;
+    max-width: 420px;
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 3px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+QCheckBox#TaskCheck-item {
+    color: black;
+    font-size: 12px;
+    max-width: 400px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+QLabel#MemoLabel-date,
+QLabel#TimeLabel-date {
+    color: rgb(150, 150, 150);
+    font-size: 12px;
+}
+
+QLabel#TimeLabel-taskName {
+    color: black;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+QLabel#TimeLabel-taskOption {
+    color: rgb(25, 110, 210);
+    font-size: 12px;
+}
+
+QLabel#MessageLabel,
+QLabel#QuestionLabel {
+    color: black;
+    font-size: 12px;
+}
+
+QTextEdit#MemoInput {
+    color: black;
+    font-size: 12px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 3px;
+}
+
+QLineEdit#TimeInput {
+    color: black;
+    width: 150px;
+    height: 30px;
+    font-size: 12px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 3px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+QPushButton#MemoButton,
+QPushButton#TimeButton,
+QPushButton#MessageButton,
+QPushButton#QuestionButtonYes {
+    width: 100px;
+    height: 30px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(25, 110, 210);
+    border: 1px solid rgb(25, 110, 210);
+    border-radius: 3px;
+}
+
+QPushButton#MemoButton:hover,
+QPushButton#TimeButton:hover,
+QPushButton#MessageButton:hover,
+QPushButton#QuestionButtonYes:hover {
+    background-color: rgb(43, 129, 214);
+}
+
+QPushButton#QuestionButtonNo {
+    width: 100px;
+    height: 30px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(150, 150, 150);
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 3px;
+}
+
+QPushButton#QuestionButtonNo:hover {
+    background-color: rgb(170, 170, 170);
+}
