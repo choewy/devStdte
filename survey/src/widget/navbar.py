@@ -1,5 +1,7 @@
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
 from src.dialog.manual import Manual
+from src.dialog.new import New
 from src.widget.home import Home
 from src.widget.list import List
 from src.widget.survey import Survey
@@ -9,13 +11,17 @@ ITEMS = {
         "type": "widget",
         "object": Home
     },
+    "    이슈현황": {
+        "type": "widget",
+        "object": List
+    },
+    "    이슈등록": {
+        "type": "dialog",
+        "object": New
+    },
     "    운영방안": {
         "type": "dialog",
         "object": Manual
-    },
-    "    목록": {
-        "type": "widget",
-        "object": List
     },
     "    로그아웃": {
         "type": "function",
@@ -35,6 +41,7 @@ class NavBar(QWidget):
         self.navBar.setObjectName("NavBarList")
         self.navBar.addItems(ITEMS.keys())
         self.navBar.setFixedWidth(180)
+        self.navBar.setFocusPolicy(Qt.NoFocus)
         self.navBar.itemClicked.connect(self.handleItemClick)
 
         layout = QVBoxLayout()
@@ -61,6 +68,11 @@ class NavBar(QWidget):
 
         except Exception as e:
             print(e)
+
+    def setSurveyList(self):
+        self.widget = ITEMS["    이슈현황"]["object"](self.central)
+        self.central.mainForm.layout().itemAt(2).widget().deleteLater()
+        self.central.mainForm.layout().addWidget(self.widget, 10)
 
     def setSurveyWidget(self, uuid):
         self.widget = Survey(self.central, uuid)

@@ -22,6 +22,10 @@ class AuthForm(QWidget):
         QWidget.__init__(self, central)
         self.central = central
 
+        self.labelLogo = QLabel()
+        self.labelLogo.setObjectName("AuthLabel-logo")
+        self.labelLogo.setPixmap(QPixmap("images/icon.png").scaledToHeight(150))
+
         self.inputId = QLineEdit()
         self.inputId.setObjectName("AuthInput")
         self.inputId.setText(getClient())
@@ -52,10 +56,12 @@ class AuthForm(QWidget):
         self.buttonLogin.setObjectName("AuthButton-login")
         self.buttonLogin.setText("로그인")
         self.buttonLogin.setCursor(Qt.PointingHandCursor)
+        self.buttonLogin.setShortcut("return")
         self.buttonLogin.clicked.connect(self.handleButtonLoginClick)
 
         layout = QVBoxLayout()
         layout.addWidget(QLabel(" "), 10)
+        layout.addWidget(self.labelLogo, alignment=Qt.AlignCenter)
         layout.addWidget(self.inputId, alignment=Qt.AlignCenter)
         layout.addWidget(self.inputPwd, alignment=Qt.AlignCenter)
         layout.addWidget(self.labelError, alignment=Qt.AlignCenter)

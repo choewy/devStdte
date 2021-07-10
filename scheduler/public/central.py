@@ -1,12 +1,14 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton
 from public.components.authForm import AuthForm
 from public.components.mainForm import MainForm
 from src.firebase.realtimedb import RealtimeDB
 from datetime import date
+from webbrowser import open
 
 
 FOOTER_TEXT = f"All rights reserved by choewy {date.today().year}"
+GITHUB_URL = "https://github.com/choewy/devStdte/tree/master/scheduler"
 
 
 class Central(QWidget):
@@ -19,7 +21,7 @@ class Central(QWidget):
 
         self.authForm = None
         self.mainForm = None
-        self.labelFooter = None
+        self.buttonFooter = None
 
         self.realTimeDB = RealtimeDB(self)
 
@@ -37,13 +39,14 @@ class Central(QWidget):
 
         self.authForm = AuthForm(self)
 
-        self.labelFooter = QLabel()
-        self.labelFooter.setObjectName("CentralFooter")
-        self.labelFooter.setText(FOOTER_TEXT)
-        self.labelFooter.setAlignment(Qt.AlignCenter)
+        self.buttonFooter = QPushButton()
+        self.buttonFooter.setObjectName("CentralFooter")
+        self.buttonFooter.setText(FOOTER_TEXT)
+        self.buttonFooter.setCursor(Qt.PointingHandCursor)
+        self.buttonFooter.clicked.connect(self.handleButtonFooterClick)
 
         layout.addWidget(self.authForm)
-        layout.addWidget(self.labelFooter)
+        layout.addWidget(self.buttonFooter, alignment=Qt.AlignCenter)
         layout.setContentsMargins(0, 0, 0, 0)
 
     def setLayoutMain(self):
@@ -54,13 +57,17 @@ class Central(QWidget):
 
         self.mainForm = MainForm(self)
 
-        self.labelFooter = QLabel()
-        self.labelFooter.setObjectName("CentralFooter")
-        self.labelFooter.setText(FOOTER_TEXT)
-        self.labelFooter.setAlignment(Qt.AlignCenter)
+        self.buttonFooter = QPushButton()
+        self.buttonFooter.setObjectName("CentralFooter")
+        self.buttonFooter.setText(FOOTER_TEXT)
+        self.buttonFooter.setCursor(Qt.PointingHandCursor)
+        self.buttonFooter.clicked.connect(self.handleButtonFooterClick)
 
         layout.addWidget(self.mainForm)
-        layout.addWidget(self.labelFooter)
+        layout.addWidget(self.buttonFooter, alignment=Qt.AlignCenter)
         layout.setContentsMargins(0, 0, 0, 0)
 
         self.mainForm.navBar.handlerItemClick(self.mainForm.navBar.navBar.item(0))
+
+    def handleButtonFooterClick(self):
+        open(GITHUB_URL)

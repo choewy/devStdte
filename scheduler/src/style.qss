@@ -13,10 +13,12 @@ QLabel#CentralFooter {
     margin-bottom: 15px;
 }
 
-QLabel#labelError {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    color: rgb(255, 0, 0);
+QPushButton#CentralFooter {
+    color: rgb(150, 150, 150);
+    background-color: rgba(255, 255, 255, 0%);
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: 0px;
 }
 
 QGroupBox#AuthBox {

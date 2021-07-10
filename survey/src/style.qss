@@ -1,17 +1,64 @@
+/*
+    Green : rgb(125, 200, 165)
+    Blue: rgb(135, 150, 220)
+*/
+
 QMainWindow#WindowMainForm {
     background-color: rgb(255, 255, 255);
 }
 
 QMainWindow#WindowAuthForm {
-    background-color: rgb(25, 25, 90);
+    background-color: rgb(255, 255, 255);
 }
 
-QLabel#CentralFooter {
+QWidget#MainForm {
+    background-color: rgb(255, 255, 255);
+}
+
+QDialog {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 3px;
+}
+
+QLabel#MessageLabel,
+QLabel#QuestionLabel {
+    color: rgb(0, 0, 0);
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+QPushButton#QuestionButtonYes {
+    width: 100px;
+    height: 30px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(135, 150, 220);
+    border: 1px solid rgb(135, 150, 220);
+    border-radius: 3px;
+}
+
+QPushButton#QusetionButtonYes:hover {
+    background-color: rgb(135, 150, 220, 80%);
+}
+
+QPushButton#QuestionButtonNo {
+    width: 100px;
+    height: 30px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(25, 110, 210);
+    border: 1px solid rgb(25, 110, 210);
+    border-radius: 3px;
+}
+
+QPushButton#CentralFooter {
     color: rgb(150, 150, 150);
+    background-color: rgba(255, 255, 255, 0%);
     margin-top: 15px;
     margin-bottom: 15px;
+    border: 0px;
 }
 
+/* AuthForm */
 QLineEdit#AuthInput {
     height: 40px;
     width: 320;
@@ -22,36 +69,45 @@ QLineEdit#AuthInput {
     background-color: rgb(255, 255, 255);
 }
 
-QLabel#AuthLabel-error {
+QLabel#AuthLabel-error,
+QLabel#NewLabel-error {
     font-size: 12px;
     color: rgb(255, 0, 0);
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
+QLabel#AuthLabel-logo {
+    margin-bottom: 20px;
+}
+
 QPushButton#AuthButton-login {
-    font-size: 16px;
+    font-size: 13px;
     height: 40px;
     width: 360px;
-    color: rgb(0, 0, 0);
-    border: 1px solid rgb(200, 200, 200);
+    color: rgb(255, 255, 255);
+    background-color: rgb(135, 150, 220);
+    border: 1px solid rgb(135, 150, 220);
     border-radius: 5px;
-    background-color: rgb(200, 200, 200);
 }
 
 QPushButton#AuthButton-login:hover {
-    background-color: rgba(200, 200, 200, 80%);
+    background-color: rgba(135, 150, 220, 80%);
 }
 
+/* NavBar */
 QListWidget#NavBarList {
     border: 0px;
     background-color: rgb(25, 25, 90);
 }
 
 QListWidget#NavBarList::item {
+    font-size: 14px;
     color: rgb(255, 255, 255);
     height: 50px;
 }
+
+/* Survey */
 QComboBox#SurveyCombo-status,
 QPushButton#SurveyButton-edit,
 QPushButton#SurveyButton-remove {
@@ -85,6 +141,26 @@ QTextEdit#SurveyText-answer {
     padding-right: 2px;
 }
 
+QTextEdit#SurveyText-answer {
+    min-height: 120px;
+    max-height: 120px;
+}
+
+QPushButton#SurveyButton-upload {
+    width: 60px;
+    min-height: 120px;
+    max-height: 120px;
+    margin-right: 2px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 3px;
+}
+
+QPushButton#SurveyButton-upload:hover {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(200, 200, 200);
+}
+
 QTableWidget#SurveyTable-answers {
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(200, 200, 200);
@@ -99,6 +175,7 @@ QTableWidget#SurveyTable-answers::item:selected {
     background-color: rgb(255, 255, 255);
 }
 
+/* Answer */
 QLabel#AnswerLabel-icon {
     margin-left: 5px;
     margin-top: 5px;
@@ -123,4 +200,83 @@ QTextEdit#AnswerTextEdit {
     padding-left: 50px;
     padding-top: 30px;
     border: 0px;
+}
+
+/* New */
+QLineEdit#NewText-title,
+QTextEdit#NewText-contents {
+    width: 400px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    font-size: 12px;
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 3px;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+QLineEdit#NewText-title {
+    min-height: 35px;
+}
+
+QTextEdit#NewText-contents {
+    min-height: 600px;
+}
+
+QPushButton#NewButton-create {
+    min-height: 35px;
+    width: 400px;
+    color: white;
+    background-color: rgb(0, 0, 0);
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 3px;
+}
+
+QPushButton#NewButton-cancel {
+    min-height: 35px;
+    width: 400px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 3px;
+}
+
+/* List */
+QTableWidget#ListTable {
+    color: rgb(0, 0, 0);
+}
+
+QTableWidget#ListTable::item:selected {
+    background-color: rgb(255, 255, 255);
+}
+
+QLineEdit#ListLineEdit-item-status-0,
+QLineEdit#ListLineEdit-item-status-1 {
+    min-width: 40px;
+    max-width: 40px;
+    min-height: 30px;
+    max-height: 30px;
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+QLineEdit#ListLineEdit-item-status-0 {
+    background-color: rgb(255, 0, 0);
+}
+
+QLineEdit#ListLineEdit-item-status-1 {
+    background-color: rgb(0, 0, 255);
+}
+
+QPushButton#ListButton-item-title {
+    max-height: 30px;
+    min-height: 30px;
+    text-align: left;
+    color: rgb(0, 0, 255);
+    background-color: rgb(255, 255, 255);
+    border: 0px;
+    padding-left: 5px;
+    margin-top: 10px;
 }

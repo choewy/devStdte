@@ -1,12 +1,18 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
 
+from src.dialog.question import Question
 from src.widget.answer import Answer
 
 
-STATUS = {
+ENCODE_STATUS = {
     0: "종료",
     1: "진행"
+}
+
+DECODE_STATUS = {
+    "종료": 0,
+    "진행": 1
 }
 
 
@@ -20,18 +26,20 @@ class Survey(QWidget):
 
         self.comboStatus = QComboBox()
         self.comboStatus.setObjectName("SurveyCombo-status")
-        self.comboStatus.addItems(STATUS.values())
+        self.comboStatus.addItems(ENCODE_STATUS.values())
         self.comboStatus.setEnabled(False)
 
         self.buttonEdit = QPushButton()
         self.buttonEdit.setObjectName("SurveyButton-edit")
         self.buttonEdit.setText("수정")
+        self.buttonEdit.setCursor(Qt.PointingHandCursor)
         self.buttonEdit.clicked.connect(self.handleButtonEditClick)
 
         self.buttonRemove = QPushButton()
         self.buttonRemove.setObjectName("SurveyButton-remove")
         self.buttonRemove.setText("삭제")
         self.buttonRemove.setVisible(False)
+        self.buttonRemove.setCursor(Qt.PointingHandCursor)
         self.buttonRemove.clicked.connect(self.handleButtonRemoveClick)
 
         layoutSetting = QHBoxLayout()
@@ -61,6 +69,13 @@ class Survey(QWidget):
         self.tableAnswers.setSelectionMode(QAbstractItemView.NoSelection)
         self.tableAnswers.setFocusPolicy(Qt.NoFocus)
         self.tableAnswers.setShowGrid(False)
+        self.tableAnswers.setVisible(False)
+
+        self.labelAnswers = QLabel()
+        self.labelAnswers.setObjectName("SurveyLabel")
+        self.labelAnswers.setText("답글이 존재하지 않습니다.")
+        self.labelAnswers.setAlignment(Qt.AlignCenter)
+        self.labelAnswers.setVisible(False)
 
         self.textAnswer = QTextEdit()
         self.textAnswer.setObjectName("SurveyText-answer")
@@ -69,6 +84,8 @@ class Survey(QWidget):
         self.buttonUpload = QPushButton()
         self.buttonUpload.setObjectName("SurveyButton-upload")
         self.buttonUpload.setText("등록")
+        self.buttonUpload.setCursor(Qt.PointingHandCursor)
+        self.buttonUpload.clicked.connect(self.handleButtonUploadClick)
 
         layoutAnswer = QHBoxLayout()
         layoutAnswer.addWidget(self.textAnswer, 10)
@@ -77,6 +94,7 @@ class Survey(QWidget):
 
         layoutRight = QVBoxLayout()
         layoutRight.addWidget(self.tableAnswers, 10)
+        layoutRight.addWidget(self.labelAnswers, 10)
         layoutRight.addLayout(layoutAnswer, 0)
 
         layout = QHBoxLayout()
@@ -90,37 +108,41 @@ class Survey(QWidget):
         self.setAnswerTable()
 
     def setSurveySource(self):
-        try:
-            self.surveySource = self.central.realtimeDB.getSurveySource(self.uuid)
-            status = self.surveySource["status"]
-            self.textAnswer.setVisible(status)
-            self.buttonUpload.setVisible(status)
-            self.comboStatus.setCurrentText(STATUS[status])
+        self.surveySource = self.central.realtimeDB.getSurveySource(self.uuid)
+        status = self.surveySource["status"]
+        self.textAnswer.setVisible(status)
+        self.buttonUpload.setVisible(status)
+        self.comboStatus.setCurrentText(ENCODE_STATUS[status])
 
-            admin = self.surveySource["admin"]
-            adminFlag = (self.central.clientId == admin) or (self.central.clientAuth in ["관리자", "개발자"])
-            self.buttonEdit.setVisible(adminFlag)
+        admin = self.surveySource["admin"]
+        adminFlag = (self.central.clientId == admin) or (self.central.clientAuth in ["관리자", "개발자"])
+        self.buttonEdit.setVisible(adminFlag)
 
-        except Exception as e:
-            print(e)
+        self.textTitle.setText(self.surveySource["title"].replace("\t", " "*4))
+        self.textContents.setPlainText(self.surveySource["contents"].replace("\t", " "*4))
 
     def setAnswerTable(self):
-        self.textTitle.setText(self.surveySource["title"])
-        self.textContents.setPlainText(self.surveySource["contents"])
-
-        self.tableAnswers.clear()
-        self.tableAnswers.setRowCount(0)
-        self.tableAnswers.setColumnCount(1)
 
         if "answers" in self.surveySource.keys():
+            self.tableAnswers.clear()
+            self.tableAnswers.setRowCount(0)
+            self.tableAnswers.setColumnCount(1)
+
             for row, key in enumerate(self.surveySource["answers"].keys()):
                 answerSource = self.surveySource["answers"][key]
-                answerWidget = Answer(self, answerSource)
+                answerWidget = Answer(self, key, answerSource)
                 self.tableAnswers.insertRow(row)
                 self.tableAnswers.setCellWidget(row, 0, answerWidget)
 
             self.tableAnswers.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
             self.tableAnswers.resizeRowsToContents()
+
+            self.labelAnswers.setVisible(False)
+            self.tableAnswers.setVisible(True)
+
+        else:
+            self.tableAnswers.setVisible(False)
+            self.labelAnswers.setVisible(True)
 
     def handleButtonEditClick(self):
         if self.buttonEdit.text() == "수정":
@@ -131,17 +153,40 @@ class Survey(QWidget):
             self.textContents.setReadOnly(False)
 
         else:
+            oldSurveySource = {
+                "title": self.surveySource["title"],
+                "contents": self.surveySource["contents"],
+                "status": self.surveySource["status"]
+            }
+
+            newSurveySource = {
+                "title": self.textTitle.text(),
+                "contents": self.textContents.toPlainText(),
+                "status": DECODE_STATUS[self.comboStatus.currentText()]
+            }
+
+            if oldSurveySource != newSurveySource:
+                self.central.realtimeDB.setSurveySource(self.uuid, newSurveySource)
+                self.setSurveySource()
+                self.setAnswerTable()
+
             self.buttonEdit.setText("수정")
-
-            title = self.textTitle.text()
-            contents = self.textContents.toPlainText()
-            status = self.comboStatus.currentText()
-            # 저장
-
             self.buttonRemove.setVisible(False)
             self.comboStatus.setEnabled(False)
             self.textTitle.setReadOnly(True)
             self.textContents.setReadOnly(True)
-
+    
     def handleButtonRemoveClick(self):
-        pass    # 삭제
+        question = Question(self.central, "설문을 삭제하시겠습니까?", "삭제", "취소")
+        question.exec_()
+
+        if question.answer:
+            self.central.realtimeDB.removeSurveySource(self.uuid)
+            self.central.mainForm.navBar.setSurveyList()
+
+    def handleButtonUploadClick(self):
+        answer = self.textAnswer.toPlainText()
+        self.central.realtimeDB.setAnswer(self.uuid, answer)
+        self.textAnswer.clear()
+        self.setSurveySource()
+        self.setAnswerTable()

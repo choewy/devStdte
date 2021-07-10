@@ -12,6 +12,8 @@ class MainForm(QWidget):
     def __init__(self, central=None):
         QWidget.__init__(self, central)
         self.central = central
+
+        self.setObjectName("MainForm")
         
         # >> 운영 방안 :: 관리자, 개발자만 수정 가능
         # >> 설문 목록 생성
