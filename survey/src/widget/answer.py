@@ -1,47 +1,41 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPixmap, QFontMetrics
+from PyQt5.QtGui import QPixmap, QFontMetrics, QIcon
 from PyQt5.QtWidgets import *
 
 
-ICON_PATH = "images/survey-answer.png"
+ANSWER_ICON_PATH = "images/survey-answer.png"
+REMOVE_ICON_PATH = "images/answer-remove.png"
 
 
-# QTextEdit으로 상속하고 padding으로 조절,
-# 그 상단에 아이콘과 날짜 배치
-class Answer(QWidget):
+class Answer(QTextEdit):
     def __init__(self, survey, answerSource):
         QWidget.__init__(self)
         self.survey = survey
 
-        self.labelIcon = QLabel()
-        self.labelIcon.setObjectName("AnswerLabel-icon")
-        self.labelIcon.setPixmap(QPixmap(ICON_PATH).scaledToHeight(30))
+        self.setObjectName("AnswerTextEdit")
+        self.setReadOnly(True)
+        self.document().setPlainText(answerSource["answer"])
+        font = self.document().defaultFont()
+        fontMetrics = QFontMetrics(font)
+        size = fontMetrics.size(0, self.toPlainText())
+        height = size.height() + 50
+        self.setMinimumHeight(height)
+        self.setMaximumHeight(height)
 
-        self.labelUploadDate = QLabel()
+        self.labelIcon = QLabel(self)
+        self.labelIcon.setObjectName("AnswerLabel-icon")
+        self.labelIcon.setPixmap(QPixmap(ANSWER_ICON_PATH).scaledToHeight(40))
+
+        self.labelUploadDate = QLabel(self)
         self.labelUploadDate.setObjectName("AnswerLabel-date")
         self.labelUploadDate.setText(answerSource["uploadTime"])
         self.labelUploadDate.setAlignment(Qt.AlignBottom)
 
-        layoutUser = QHBoxLayout()
-        layoutUser.addWidget(self.labelIcon, stretch=0, alignment=Qt.AlignLeft)
-        layoutUser.addWidget(self.labelUploadDate, stretch=10)
-        layoutUser.setContentsMargins(0, 0, 0, 0)
+        self.buttonRemove = QPushButton(self)
+        self.buttonRemove.setObjectName("AnswerButton-remove")
+        self.buttonRemove.setIcon(QIcon(QPixmap(REMOVE_ICON_PATH)))
+        self.buttonRemove.setCursor(Qt.PointingHandCursor)
+        self.buttonRemove.move(160, 0)
+        if self.survey.central.clientAuth not in ["관리자", "개발자"]:
+            self.buttonRemove.setVisible(False)
 
-        self.textAnswer = QTextEdit()
-        self.textAnswer.setObjectName("AnswerTextEdit")
-        self.textAnswer.setReadOnly(True)
-        self.textAnswer.document().setPlainText(answerSource["answer"])
-
-        font = self.textAnswer.document().defaultFont()
-        fontMetrics = QFontMetrics(font)
-        size = fontMetrics.size(0, self.textAnswer.toPlainText())
-        height = size.height() + 15
-        self.textAnswer.setMinimumHeight(height)
-        self.textAnswer.setMaximumHeight(height)
-
-        layout = QVBoxLayout()
-        layout.addLayout(layoutUser, 0)
-        layout.addWidget(self.textAnswer, 10)
-        layout.setContentsMargins(0, 0, 0, 0)
-
-        self.setLayout(layout)

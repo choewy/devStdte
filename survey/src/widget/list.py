@@ -85,6 +85,10 @@ class List(QWidget):
             self.tableSurvey.setItem(row, 3, itemAnswerCounts)
 
         self.tableSurvey.resizeColumnsToContents()
+        self.tableSurvey.horizontalHeader().setSectionResizeMode(0, QHeaderView.Fixed)
+        self.tableSurvey.horizontalHeader().setSectionResizeMode(1, QHeaderView.Stretch)
+        self.tableSurvey.horizontalHeader().setSectionResizeMode(2, QHeaderView.Fixed)
+        self.tableSurvey.horizontalHeader().setSectionResizeMode(3, QHeaderView.Fixed)
 
     def handleButtonNewClick(self):
         widgetTitle = self.sender()

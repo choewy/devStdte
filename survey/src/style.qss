@@ -52,8 +52,75 @@ QListWidget#NavBarList::item {
     color: rgb(255, 255, 255);
     height: 50px;
 }
+QComboBox#SurveyCombo-status,
+QPushButton#SurveyButton-edit,
+QPushButton#SurveyButton-remove {
+    width: 80px;
+    height: 30px;
+    font-size: 12px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 3px;
+}
+
+QLineEdit#SurveyText-title {
+    height: 30px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    font-size: 12px;
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+QTextEdit#SurveyText-contents,
+QTextEdit#SurveyText-answer {
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    font-size: 12px;
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 3px;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+QTableWidget#SurveyTable-answers {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 3px;
+}
+
+QTableWidget#SurveyTable-answers::item {
+    border: 0px;
+}
+
+QTableWidget#SurveyTable-answers::item:selected {
+    background-color: rgb(255, 255, 255);
+}
 
 QLabel#AnswerLabel-icon {
-    border: 1px solid rgba(50, 50, 50);
-    border-radius: 15px;
+    margin-left: 5px;
+    margin-top: 5px;
+    border: 0px solid rgba(50, 50, 50);
+    border-radius: 20px;
+}
+
+QLabel#AnswerLabel-date {
+    padding-top: 10px;
+    padding-left: 50px;
+}
+
+QPushButton#AnswerButton-remove {
+    margin-top: 10px;
+    width: 20px;
+    height: 20px;
+    background-color: rgb(255, 255, 255);
+    border: 0px;
+}
+
+QTextEdit#AnswerTextEdit {
+    padding-left: 50px;
+    padding-top: 30px;
+    border: 0px;
 }

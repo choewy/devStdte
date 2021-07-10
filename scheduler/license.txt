@@ -1,2 +1,2 @@
-ìì„¸í•œ ì„¤ëª…ì€ ì•„ë˜ ë§í¬ë¥¼ ì°¸ì¡°í•˜ì„¸ìš”.
-- https://github.com/choewy/devStdte/tree/master/scheduler
+ÇÁ·Î±×·¥ ¼Ò½ºÄÚµå ¹× ¼³¸íÀº ¾Æ·¡ ¸µÅ©¸¦ ÂüÁ¶ÇÏ¼¼¿ä.
+¡Û Github Repository : https://github.com/choewy/devStdte/tree/master/scheduler
