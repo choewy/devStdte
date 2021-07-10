@@ -1,5 +1,5 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QListWidget
 from src.dialog.manual import Manual
 from src.dialog.new import New
 from src.widget.home import Home
@@ -30,51 +30,39 @@ ITEMS = {
 }
 
 
-class NavBar(QWidget):
+class NavBar(QListWidget):
     def __init__(self, central):
         QWidget.__init__(self)
         self.central = central
 
         self.widget = None
-
-        self.navBar = QListWidget()
-        self.navBar.setObjectName("NavBarList")
-        self.navBar.addItems(ITEMS.keys())
-        self.navBar.setFixedWidth(180)
-        self.navBar.setFocusPolicy(Qt.NoFocus)
-        self.navBar.itemClicked.connect(self.handleItemClick)
-
-        layout = QVBoxLayout()
-        layout.addWidget(self.navBar)
-        layout.setContentsMargins(0, 0, 0, 0)
-
-        self.setLayout(layout)
+        self.setObjectName("NavBarList")
+        self.addItems(ITEMS.keys())
+        self.setFixedWidth(180)
+        self.setFocusPolicy(Qt.NoFocus)
+        self.itemClicked.connect(self.handleItemClick)
 
     def handleItemClick(self, item):
-        try:
-            itemText = item.text()
+        itemText = item.text()
 
-            widgetType = ITEMS[itemText]["type"]
-            if widgetType == "widget":
-                self.widget = ITEMS[itemText]["object"](self.central)
-                self.central.mainForm.layout().itemAt(2).widget().deleteLater()
-                self.central.mainForm.layout().addWidget(self.widget, 10)
+        widgetType = ITEMS[itemText]["type"]
+        if widgetType == "widget":
+            self.widget = ITEMS[itemText]["object"](self.central)
+            self.central.mainForm.layoutContents.itemAt(0).widget().deleteLater()
+            self.central.mainForm.layoutContents.insertWidget(0, self.widget, 10)
 
-            elif widgetType == "dialog":
-                ITEMS[itemText]["object"](self.central).exec_()
+        elif widgetType == "dialog":
+            ITEMS[itemText]["object"](self.central).exec_()
 
-            else:
-                self.central.setLayoutAuth()
-
-        except Exception as e:
-            print(e)
+        else:
+            self.central.setLayoutAuth()
 
     def setSurveyList(self):
         self.widget = ITEMS["    이슈현황"]["object"](self.central)
-        self.central.mainForm.layout().itemAt(2).widget().deleteLater()
-        self.central.mainForm.layout().addWidget(self.widget, 10)
+        self.central.mainForm.layoutContents.itemAt(0).widget().deleteLater()
+        self.central.mainForm.layoutContents.insertWidget(0, self.widget, 10)
 
     def setSurveyWidget(self, uuid):
         self.widget = Survey(self.central, uuid)
-        self.central.mainForm.layout().itemAt(2).widget().deleteLater()
-        self.central.mainForm.layout().addWidget(self.widget, 10)
+        self.central.mainForm.layoutContents.itemAt(0).widget().deleteLater()
+        self.central.mainForm.layoutContents.insertWidget(0, self.widget, 10)

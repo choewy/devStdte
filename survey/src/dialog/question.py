@@ -17,11 +17,13 @@ class Question(QDialog):
         self.buttonYes = QPushButton()
         self.buttonYes.setObjectName("QuestionButtonYes")
         self.buttonYes.setText(btnYes)
+        self.buttonYes.setCursor(Qt.PointingHandCursor)
         self.buttonYes.clicked.connect(self.handleButtonYesClick)
 
         self.buttonNo = QPushButton()
         self.buttonNo.setObjectName("QuestionButtonNo")
         self.buttonNo.setText(btnNo)
+        self.buttonNo.setCursor(Qt.PointingHandCursor)
         self.buttonNo.clicked.connect(self.close)
 
         layoutBtn = QHBoxLayout()

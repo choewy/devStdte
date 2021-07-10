@@ -1,5 +1,5 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton
 from datetime import date
 from public.components.authForm import AuthForm
 from public.components.mainForm import MainForm
@@ -18,6 +18,8 @@ class Central(QWidget):
 
         self.clientId = None
         self.clientAuth = None
+        self.clientId = "choewy"
+        self.clientAuth = "개발자"
 
         self.authForm = None
         self.mainForm = None
@@ -28,9 +30,9 @@ class Central(QWidget):
 
         layout = QVBoxLayout()
         layout.setContentsMargins(0, 0, 0, 0)
-
         self.setLayout(layout)
         self.setLayoutAuth()
+        # self.setLayoutMain()
 
     def setLayoutAuth(self):
         self.window.setObjectName("WindowAuthForm")
@@ -41,13 +43,13 @@ class Central(QWidget):
         for cnt in range(self.layout().count()):
             layout.itemAt(cnt).widget().deleteLater()
 
-        self.authForm = AuthForm(self)
-
         self.buttonFooter = QPushButton()
         self.buttonFooter.setObjectName("CentralFooter")
         self.buttonFooter.setText(FOOTER_TEXT)
         self.buttonFooter.setCursor(Qt.PointingHandCursor)
         self.buttonFooter.clicked.connect(self.handleButtonFooterClick)
+
+        self.authForm = AuthForm(self)
 
         layout.addWidget(self.authForm)
         layout.addWidget(self.buttonFooter, alignment=Qt.AlignCenter)
@@ -62,16 +64,15 @@ class Central(QWidget):
         for cnt in range(self.layout().count()):
             layout.itemAt(cnt).widget().deleteLater()
 
-        self.mainForm = MainForm(self)
-
         self.buttonFooter = QPushButton()
         self.buttonFooter.setObjectName("CentralFooter")
         self.buttonFooter.setText(FOOTER_TEXT)
         self.buttonFooter.setCursor(Qt.PointingHandCursor)
         self.buttonFooter.clicked.connect(self.handleButtonFooterClick)
 
+        self.mainForm = MainForm(self)
+
         layout.addWidget(self.mainForm)
-        layout.addWidget(self.buttonFooter, alignment=Qt.AlignCenter)
         layout.setContentsMargins(0, 0, 0, 0)
 
     def handleButtonFooterClick(self):

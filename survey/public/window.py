@@ -16,13 +16,14 @@ def getStyleSheet():
 class Window(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
+        print(1)
         self.setWindowIcon(QIcon(ICON_PATH))
         self.setWindowTitle(f"{APP_TITLE} - {APP_VERSION}")
 
         self.central = Central(self)
         self.setCentralWidget(self.central)
 
-        self.setMinimumSize(800, 800)
+        self.setMinimumSize(820, 800)
         self.setStyleSheet(getStyleSheet())
 
         self.objectNameChanged.connect(self.handleObjectNameChange)
