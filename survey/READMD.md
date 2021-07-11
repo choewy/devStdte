@@ -1,4 +1,4 @@
-# 화재안전팀 시간관리 프로그램
+# 화재안전팀 의견수렴 프로그램
 
 1. [개요](#1-개요)
 2. [주요기능](#2-주요기능)
@@ -12,7 +12,9 @@
 
 ## 1. 개요
 
-💡 본 프로그램은 사업별 수행 시간 관리를 위한 데이터베이스 기반 프로그램 입니다.
+💡 본 프로그램은 다양한 이슈의 의견 수렴을 위한 데이터베이스 기반 프로그램 입니다.
+
+✨ 시간관리 프로그램의 계정을 통해 로그인할 수 있으며, 회원가입 또한 시간관리 프로그램을 통해서만 가능합니다.
 
 ✨ 장기 출장자를 고려하여 `firebase`를 사용한 외부 서버로 구축하였기 때문에 더 이상 가상머신(`virtualBox`)의 노예가 되지 않아도 된답니다!🙌
 
@@ -20,17 +22,15 @@
 
 ## 2. 주요기능
 
-✔ 로그인 화면에서 회원가입
+✔ 신규 이슈 등록
 
-✔ 개인정보 수정
+✔ 답글 등록
 
-✔ 시간정보와 메모 입력
+✔ 운영 방안 확인 : 모든 사용자가 운영 방안을 확인할 수 있으며, 관리자만 수정 가능합니다.
 
-✔ 연도별 또는 부서원별 시간 집계 산출
+✨ 신규 이슈 등록자인 경우 이슈 제목, 내용 수정 및 삭제 가능
 
-✨ 관리자인 경우 부서원 정보와 사업 정보 수정 가능
-
-⁉ 의견 수렴 기능은 서버 통신 효율 향상을 위해서 삭제하였습니다. 일단 이 프로그램을 다시 개발했기 때문에 좀 쉬고💤 별도의 프로그램으로 다시 개발할 예정입니다. 💨💨
+✨ 관리자인 모든 이슈 수정 및 삭제 가능, 모든 답글 삭제 가능, 운영 방안 수정 가능
 
 <br>
 
@@ -94,24 +94,14 @@ pyinstaller -w -i=images/icon.ico app-build-version.py
 
 > 📁 `../images/` : 프로그램에 사용되는 이미지, 아이콘 파일
 >
-> 🔐 `(gitignore) ../dump/`
-> 
-> > 📗 `__init__.py` : 패키지 파일
-> >
-> > 📗 `dump.py` : 기존 가상머신 데이터 `dump` 파일
-> >
-> > 📗 `widget.py` : 덤프 프로그램 메인 윈도우의 메인 위젯 파일
-> >
-> > 📗 `window.py` : 덤프 프로그램의 메인 윈도우 파일
-> 
 > 📁 `../public/`
-> 
+>
 > > 📁 `../components/`
 > >
 > > > 📗 `__init__.py` : 패키지 파일
-> >>
-> > > 📗 `authForm.py` : 로그인, 회원가입 화면 파일
-> >> 
+> >
+> > > 📗 `authForm.py` : 로그인 화면 파일
+> >
 > > > 📗 `mainForm.py` : 로그인 후 나타나는 메인 화면 파일
 > >
 > > 📗 `__init__.py` : 패키지 파일
@@ -119,84 +109,76 @@ pyinstaller -w -i=images/icon.ico app-build-version.py
 > > 📗 `window.py` : 프로그램의 메인 윈도우 파일
 > >
 > > 📗 `central.py` : 메인 윈도우의 메인 위젯 파일
-> 
+>
 > 📁 `../src/`
-> 
+>
 > > 📁 `../dialog/`
 > >
 > > > 📗 `__init__.py` : 패키지 파일
-> >>
-> > > 📗 `message.py` : 메시지 다이얼로그 파일
-> >> 
-> > > 📗 `question.py` : 의사결정 다이얼로그 파일
-> >> 
-> > > 📗 `time.py` : 시간 입력 다이얼로그 파일
-> >> 
-> > > 📗 `memo.py` : 메모 정보 다이얼로그 파일
+> >
+> > > 📗 `manual.py` : 운영 방안 다이얼로그 파일
+> >
+> > > 📗 `new.py` : 새 이슈 등록 다이얼로그 파일
+> >
+> > > 📗 `question.py` : 의사 결정 다이얼로그 파일
 > >
 > > 📁 `../firebase/`
 > >
 > > > 📗 `__init__.py` : 패키지 파일
 > > >
 > > > 📗 `realtimedb.py` : `firebase`의 `Real Time Database` 쿼리 파일
-> > > 
-> > > 🔐 `(.gitignore) privacy_key.json` : `firebase` 사용자 인증 파일
-> > 
+> > >
+> > > 🔐 `(.gitignore) scheduler_privacy_key.json` : `firebase` 사용자 인증 파일
+> > >
+> > > 🔐 `(.gitignore) survey_privacy_key.json` : `firebase` 사용자 인증 파일
+> >
 > > 📁 `../widget/`
 > >
 > > > 📗 `__init__.py` : 패키지 파일
-> >>
-> > > 📗 `header.py` : 메인 화면 상단 헤더 파일
-> > > 
-> > > 📗 `navbar.py` : 메인 화면 좌측 메뉴 파일
-> > > 
-> > > 📗 `schedule.py` : 시간관리 정보 위젯 파일
-> > > 
-> > > 📗 `task.py` : 사업 정보 위젯 파일
-> > > 
-> > > 📗 `user.py` : 부서원 정보 위젯 파일
+> >
+> > > 📗 `header.py` : 이슈 상단 헤더 위젯 파일
 > > >
-> > > 📗 `total.py` : 시간 집계 위젯 파일
+> > > 📗 `answer.py` : 이슈에 해당하는 답글 위젯 파일
 > > >
-> > > 📗 `totalYear.py` : 연도별 시간 집계 탭 위젯 파일
-> >> 
-> > > 📗 `totalUser.py` : 사용자별 시간 집계 탭 위젯 파일
+> > > 📗 `home.py` : 홈 위젯 파일
+> > >
+> > > 📗 `list.py` : 이슈 목록 위젯 파일
+> > >
+> > > 📗 `navBar.py` : 메인 화면 좌측 메뉴 위젯 파일
+> > >
+> > > 📗 `survey.py` : 이슈 내용 위젯 파일
+> > >
+> > > 📗 `title.py` : 이슈 목록 제목 위젯 파일
 > >
 > > 📗 `__init__.py` : 패키지 파일
-> > 
-> > 🔐 `(.gitignore) modules.py` : 모듈 설치 여부 확인 파일
-> > 
-> > 🔐 `(.gitignore) modules.json` : 모듈 정보 저장 파일
-> > 
+> >
 > > 📘 `style.qss` :  프로그램 스타일시트 파일
-> 
+>
 > 📁 `../temp/`
-> 
+>
 > > 📔 `client.json` : 사용자 아이디 저장 파일
-> 
+>
 > 📔`READ.md` : 프로그램 설명 파일
-> 
+>
 > 📗 `app-build-version.py` : 프로그램 실행 파일
-> 
-> 🔐 `(.gitignore) app-dev-version.py` : 테스트 버전 실행 파일
-> 
+>
 > 🔐 `(.gitignore) app-dump-version.py` : 데이터베이스 `dump` 실행 파일
 
 <br>
 
 ## 6. 실행방법
 
-✔ 방법 1 : `app.exe` 또는 `stdte Scheduler` 실행
+✔ 방법 1 : `app.exe` 또는 `stdte Survey` 실행
 
 ✔ 방법 2 : 명령 프롬프트 실행
 
 ```commandline
 cd scheduler
-python app-build-version.py
+python app-build-survey.py
 ```
 
 <br>
 
 ## 7. 수정이력
 
-✔ `2021-07-09` : 최초 배포
+✔ `2021-07-12` : 최초 배포
