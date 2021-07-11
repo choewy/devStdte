@@ -51,6 +51,7 @@ class AuthForm(QWidget):
         self.labelError = QLabel()
         self.labelError.setObjectName("AuthLabel-error")
         self.labelError.setText(" ")
+        self.labelError.setAlignment(Qt.AlignCenter)
 
         self.buttonLogin = QPushButton()
         self.buttonLogin.setObjectName("AuthButton-login")
@@ -88,7 +89,7 @@ class AuthForm(QWidget):
             userData = self.central.realtimeDB.getUserPwd(userId)
 
             if not userData:
-                self.labelError.setText("계정이 존재하지 않습니다.\n회원가입은 시간관리 프로그램을 통해서만 가능ㄴ합니다.")
+                self.labelError.setText("계정이 존재하지 않습니다.\n회원가입은 시간관리 프로그램을 통해서만 가능합니다.")
 
             elif userPwd != userData:
                 self.labelError.setText("비밀번호가 일치하지 않습니다.")

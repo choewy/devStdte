@@ -16,7 +16,6 @@ def getStyleSheet():
 class Window(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
-        print(1)
         self.setWindowIcon(QIcon(ICON_PATH))
         self.setWindowTitle(f"{APP_TITLE} - {APP_VERSION}")
 

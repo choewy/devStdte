@@ -57,6 +57,11 @@ class NavBar(QListWidget):
         else:
             self.central.setLayoutAuth()
 
+    def setHomeWidget(self):
+        self.widget = ITEMS["    홈"]["object"](self.central)
+        self.central.mainForm.layoutContents.itemAt(0).widget().deleteLater()
+        self.central.mainForm.layoutContents.insertWidget(0, self.widget, 10)
+
     def setSurveyList(self):
         self.widget = ITEMS["    이슈현황"]["object"](self.central)
         self.central.mainForm.layoutContents.itemAt(0).widget().deleteLater()

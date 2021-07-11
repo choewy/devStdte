@@ -47,6 +47,7 @@ class Central(QWidget):
         self.buttonFooter.setObjectName("CentralFooter")
         self.buttonFooter.setText(FOOTER_TEXT)
         self.buttonFooter.setCursor(Qt.PointingHandCursor)
+        self.buttonFooter.setFocusPolicy(Qt.NoFocus)
         self.buttonFooter.clicked.connect(self.handleButtonFooterClick)
 
         self.authForm = AuthForm(self)
@@ -68,12 +69,15 @@ class Central(QWidget):
         self.buttonFooter.setObjectName("CentralFooter")
         self.buttonFooter.setText(FOOTER_TEXT)
         self.buttonFooter.setCursor(Qt.PointingHandCursor)
+        self.buttonFooter.setFocusPolicy(Qt.NoFocus)
         self.buttonFooter.clicked.connect(self.handleButtonFooterClick)
 
         self.mainForm = MainForm(self)
 
         layout.addWidget(self.mainForm)
         layout.setContentsMargins(0, 0, 0, 0)
+
+        self.mainForm.navBar.setHomeWidget()
 
     def handleButtonFooterClick(self):
         open(GITHUB_URL)

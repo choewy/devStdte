@@ -1,7 +1,7 @@
 from PyQt5.QtCore import Qt, QSize
 from PyQt5.QtGui import QPixmap, QIcon
-from PyQt5.QtWidgets import QWidget, QPushButton, QHBoxLayout, QLabel, QLineEdit, QTextEdit, QVBoxLayout, QTableWidget, \
-    QAbstractItemView, QHeaderView
+from PyQt5.QtWidgets import QWidget, QPushButton, QHBoxLayout, QLabel, QLineEdit, QTextEdit, QVBoxLayout, QScrollArea, \
+    QGroupBox, QFormLayout, QAbstractSlider
 from src.widget.answer import Answer
 from src.widget.header import Header
 
@@ -40,14 +40,16 @@ class Survey(QWidget):
         layoutLeft.addWidget(self.textTitle, 0)
         layoutLeft.addWidget(self.textContents, 10)
 
-        self.tableAnswers = QTableWidget()
-        self.tableAnswers.setObjectName("SurveyTable-answers")
-        self.tableAnswers.horizontalHeader().setVisible(False)
-        self.tableAnswers.verticalHeader().setVisible(False)
-        self.tableAnswers.setSelectionMode(QAbstractItemView.NoSelection)
-        self.tableAnswers.setFocusPolicy(Qt.NoFocus)
-        self.tableAnswers.setShowGrid(False)
-        self.tableAnswers.setVisible(False)
+        groupAnswers = QGroupBox()
+        groupAnswers.setObjectName("SurveyGroup-answers")
+
+        self.areaAnswers = QScrollArea(self)
+        self.areaAnswers.setObjectName("SurveyArea-answers")
+        self.areaAnswers.setWidget(groupAnswers)
+        self.areaAnswers.setWidgetResizable(True)
+        self.areaAnswers.setVisible(False)
+
+        self.layoutAnswers = QFormLayout(groupAnswers)
 
         self.labelAnswers = QLabel()
         self.labelAnswers.setObjectName("SurveyLabel")
@@ -74,7 +76,7 @@ class Survey(QWidget):
         layoutAnswer.setContentsMargins(0, 0, 0, 0)
 
         layoutRight = QVBoxLayout()
-        layoutRight.addWidget(self.tableAnswers, 10)
+        layoutRight.addWidget(self.areaAnswers, 10)
         layoutRight.addWidget(self.labelAnswers, 10)
         layoutRight.addLayout(layoutAnswer, 0)
         layoutRight.setContentsMargins(0, 0, 0, 0)
@@ -92,7 +94,7 @@ class Survey(QWidget):
         self.setLayout(layout)
 
         self.setSurveySource()
-        self.setAnswerTable()
+        self.setAnswerArea()
 
     def setSurveySource(self):
         self.surveySource = self.central.realtimeDB.getSurveySource(self.uuid)
@@ -105,27 +107,24 @@ class Survey(QWidget):
         self.textTitle.setText(self.surveySource["title"].replace("\t", " "*4))
         self.textContents.setPlainText(self.surveySource["contents"].replace("\t", " "*4))
 
-    def setAnswerTable(self):
-
+    def setAnswerArea(self):
         if "answers" in self.surveySource.keys():
-            self.tableAnswers.clear()
-            self.tableAnswers.setRowCount(0)
-            self.tableAnswers.setColumnCount(1)
+            for idx in range(self.layoutAnswers.count()):
+                self.layoutAnswers.itemAt(idx).widget().deleteLater()
 
             for row, key in enumerate(self.surveySource["answers"].keys()):
                 answerSource = self.surveySource["answers"][key]
                 answerWidget = Answer(self, key, answerSource)
-                self.tableAnswers.insertRow(row)
-                self.tableAnswers.setCellWidget(row, 0, answerWidget)
-
-            self.tableAnswers.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-            self.tableAnswers.resizeRowsToContents()
+                self.layoutAnswers.addRow("", answerWidget)
 
             self.labelAnswers.setVisible(False)
-            self.tableAnswers.setVisible(True)
-
+            self.areaAnswers.setVisible(True)
+            try:
+                self.areaAnswers.verticalScrollBar().triggerAction(QAbstractSlider.SliderToMaximum)
+            except Exception as e:
+                print(e)
         else:
-            self.tableAnswers.setVisible(False)
+            self.areaAnswers.setVisible(False)
             self.labelAnswers.setVisible(True)
 
     def handleButtonUploadClick(self):
@@ -133,7 +132,7 @@ class Survey(QWidget):
         self.central.realtimeDB.setAnswer(self.uuid, answer)
         self.textAnswer.clear()
         self.setSurveySource()
-        self.setAnswerTable()
+        self.setAnswerArea()
 
     def handleTextAnswerChange(self):
         text = self.textAnswer.toPlainText()

@@ -19,10 +19,6 @@ DECODE_STATUS = {
     "진행": 1
 }
 
-ICON_EDIT = QIcon(QPixmap("images/survey-edit.png"))
-ICON_REMOVE = QIcon(QPixmap("images/survey-remove.png"))
-ICON_SAVE = QIcon(QPixmap("images/survey-save.png"))
-
 
 class Header(QLabel):
     def __init__(self, survey):
@@ -46,23 +42,25 @@ class Header(QLabel):
         self.buttonEdit = QPushButton()
         self.buttonEdit.setObjectName("SurveyButton-edit")
         self.buttonEdit.mode = "edit"
-        self.buttonEdit.setIcon(ICON_EDIT)
+        self.buttonEdit.setIcon(QIcon(QPixmap("images/survey-edit.png").scaledToHeight(30)))
         self.buttonEdit.setCursor(Qt.PointingHandCursor)
+        self.buttonEdit.setFocusPolicy(Qt.NoFocus)
         self.buttonEdit.clicked.connect(self.handleButtonEditClick)
 
         self.buttonRemove = QPushButton()
         self.buttonRemove.setObjectName("SurveyButton-remove")
-        self.buttonRemove.setIcon(ICON_REMOVE)
+        self.buttonRemove.setIcon(QIcon(QPixmap("images/survey-remove.png").scaledToHeight(30)))
         self.buttonRemove.setVisible(False)
         self.buttonRemove.setCursor(Qt.PointingHandCursor)
+        self.buttonRemove.setFocusPolicy(Qt.NoFocus)
         self.buttonRemove.clicked.connect(self.handleButtonRemoveClick)
 
         layout = QHBoxLayout()
         layout.addWidget(self.labelIcon, 0)
         layout.addWidget(self.labelTitle, 10)
         layout.addWidget(self.comboStatus, 0)
-        layout.addWidget(self.buttonRemove, 0)
         layout.addWidget(self.buttonEdit, 0)
+        layout.addWidget(self.buttonRemove, 0)
         layout.setContentsMargins(0, 0, 0, 0)
 
         self.setLayout(layout)
@@ -81,7 +79,8 @@ class Header(QLabel):
 
     def handleButtonEditClick(self):
         if self.buttonEdit.mode == "edit":
-            self.buttonEdit.setIcon(ICON_SAVE)
+            self.buttonEdit.mode = "save"
+            self.buttonEdit.setIcon(QIcon(QPixmap("images/survey-save.png").scaledToHeight(30)))
             self.buttonRemove.setVisible(True)
             self.comboStatus.setVisible(True)
             self.survey.textTitle.setVisible(True)
@@ -104,9 +103,11 @@ class Header(QLabel):
             if oldSurveySource != newSurveySource:
                 self.survey.central.realtimeDB.setSurveySource(self.survey.uuid, newSurveySource)
                 self.survey.setSurveySource()
-                self.survey.setAnswerTable()
+                # self.survey.setAnswerTable()
+                self.survey.setAnswerArea()
 
-            self.buttonEdit.setIcon(ICON_EDIT)
+            self.buttonEdit.mode = "edit"
+            self.buttonEdit.setIcon(QIcon(QPixmap("images/survey-edit.png").scaledToHeight(30)))
             self.buttonRemove.setVisible(False)
             self.comboStatus.setVisible(False)
             self.survey.textTitle.setVisible(False)
@@ -114,7 +115,7 @@ class Header(QLabel):
             self.survey.textContents.setReadOnly(True)
 
     def handleButtonRemoveClick(self):
-        question = Question(self.survey.central, "설문을 삭제하시겠습니까?", "삭제", "취소")
+        question = Question(self.survey.central, "이슈를 삭제하시겠습니까?", "삭제", "취소")
         question.exec_()
 
         if question.answer:

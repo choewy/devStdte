@@ -128,9 +128,7 @@ QLabel#HeaderLabel-title {
 }
 
 /* Survey */
-QComboBox#SurveyCombo-status,
-QPushButton#SurveyButton-edit,
-QPushButton#SurveyButton-remove {
+QComboBox#SurveyCombo-status {
     width: 80px;
     height: 30px;
     color: rgb(0, 0, 0);
@@ -138,10 +136,18 @@ QPushButton#SurveyButton-remove {
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(200, 200, 200);
     border-radius: 3px;
+    margin-right: 5px;
 }
 
-QComboBox#SurveyCombo-status:enabled {
-    border: 1px solid rgb(135, 150, 220);
+QPushButton#SurveyButton-edit,
+QPushButton#SurveyButton-remove {
+    width: 30px;
+    height: 30px;
+    color: rgb(0, 0, 0);
+    font-size: 12px;
+    background-color: rgb(255, 255, 255);
+    border: 0px;
+    margin-right: 5px;
 }
 
 QLineEdit#SurveyText-title {
@@ -188,18 +194,14 @@ QPushButton#SurveyButton-upload:disabled {
     background-color: rgba(200, 200, 200);
 }
 
-QTableWidget#SurveyTable-answers {
+QGroupBox#SurveyGroup-answers {
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(200, 200, 200);
     border-radius: 3px;
 }
 
-QTableWidget#SurveyTable-answers::item {
+QScrollArea#SurveyArea-answers {
     border: 0px;
-}
-
-QTableWidget#SurveyTable-answers::item:selected {
-    background-color: rgb(255, 255, 255);
 }
 
 /* Answer */
@@ -211,7 +213,9 @@ QLabel#AnswerLabel-icon {
 }
 
 QLabel#AnswerLabel-date {
-    padding-top: 10px;
+    font-size: 11px;
+    color: rgb(150, 150, 150);
+    padding-top: 30px;
     padding-left: 50px;
 }
 
@@ -223,10 +227,9 @@ QPushButton#AnswerButton-remove {
     border: 0px;
 }
 
-QTextEdit#AnswerTextEdit {
+QLabel#AnswerLabel-answer {
     padding-left: 50px;
-    padding-top: 30px;
-    border: 0px;
+    padding-top: 50px;
 }
 
 /* New */
