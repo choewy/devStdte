@@ -40,16 +40,16 @@ class Survey(QWidget):
         layoutLeft.addWidget(self.textTitle, 0)
         layoutLeft.addWidget(self.textContents, 10)
 
-        groupAnswers = QGroupBox()
-        groupAnswers.setObjectName("SurveyGroup-answers")
+        self.groupAnswers = QGroupBox()
+        self.groupAnswers.setObjectName("SurveyGroup-answers")
 
         self.areaAnswers = QScrollArea(self)
         self.areaAnswers.setObjectName("SurveyArea-answers")
-        self.areaAnswers.setWidget(groupAnswers)
+        self.areaAnswers.setWidget(self.groupAnswers)
         self.areaAnswers.setWidgetResizable(True)
         self.areaAnswers.setVisible(False)
 
-        self.layoutAnswers = QFormLayout(groupAnswers)
+        self.layoutAnswers = QFormLayout(self.groupAnswers)
 
         self.labelAnswers = QLabel()
         self.labelAnswers.setObjectName("SurveyLabel")
@@ -109,6 +109,7 @@ class Survey(QWidget):
 
     def setAnswerArea(self):
         if "answers" in self.surveySource.keys():
+
             for idx in range(self.layoutAnswers.count()):
                 self.layoutAnswers.itemAt(idx).widget().deleteLater()
 
@@ -119,10 +120,7 @@ class Survey(QWidget):
 
             self.labelAnswers.setVisible(False)
             self.areaAnswers.setVisible(True)
-            try:
-                self.areaAnswers.verticalScrollBar().triggerAction(QAbstractSlider.SliderToMaximum)
-            except Exception as e:
-                print(e)
+
         else:
             self.areaAnswers.setVisible(False)
             self.labelAnswers.setVisible(True)
