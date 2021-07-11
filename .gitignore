@@ -11,6 +11,7 @@ scheduler/src/modules.json
 scheduler/src/modules.py
 scheduler/app-dump-version.py
 scheduler/dump
+survey/app-dump-version.py
 
 # production
 scheduler/build
