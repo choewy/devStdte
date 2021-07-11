@@ -1,6 +1,6 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap, QIcon
-from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import QLabel, QComboBox, QPushButton, QHBoxLayout
 
 from src.dialog.question import Question
 
@@ -22,7 +22,7 @@ DECODE_STATUS = {
 
 class Header(QLabel):
     def __init__(self, survey):
-        QWidget.__init__(self, survey.central)
+        QLabel.__init__(self, survey.central)
         self.survey = survey
 
         self.setFixedHeight(70)
@@ -40,7 +40,7 @@ class Header(QLabel):
         self.comboStatus.setVisible(False)
 
         self.buttonEdit = QPushButton()
-        self.buttonEdit.setObjectName("SurveyButton-edit")
+        self.buttonEdit.setObjectName("HeaderButton-edit")
         self.buttonEdit.mode = "edit"
         self.buttonEdit.setIcon(QIcon(QPixmap("images/survey-edit.png").scaledToHeight(30)))
         self.buttonEdit.setCursor(Qt.PointingHandCursor)
@@ -48,7 +48,7 @@ class Header(QLabel):
         self.buttonEdit.clicked.connect(self.handleButtonEditClick)
 
         self.buttonRemove = QPushButton()
-        self.buttonRemove.setObjectName("SurveyButton-remove")
+        self.buttonRemove.setObjectName("HeaderButton-remove")
         self.buttonRemove.setIcon(QIcon(QPixmap("images/survey-remove.png").scaledToHeight(30)))
         self.buttonRemove.setVisible(False)
         self.buttonRemove.setCursor(Qt.PointingHandCursor)
@@ -103,7 +103,6 @@ class Header(QLabel):
             if oldSurveySource != newSurveySource:
                 self.survey.central.realtimeDB.setSurveySource(self.survey.uuid, newSurveySource)
                 self.survey.setSurveySource()
-                # self.survey.setAnswerTable()
                 self.survey.setAnswerArea()
 
             self.buttonEdit.mode = "edit"

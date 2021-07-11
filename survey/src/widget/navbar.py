@@ -1,5 +1,5 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QListWidget
+from PyQt5.QtWidgets import QWidget, QListWidget
 from src.dialog.manual import Manual
 from src.dialog.new import New
 from src.widget.home import Home

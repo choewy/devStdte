@@ -1,9 +1,8 @@
-import datetime
-import time
-
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
+import datetime
+import time
 
 
 class RealTimeDB:
@@ -57,7 +56,7 @@ class RealTimeDB:
                     surveySource["createTime"],
                     len(answers.keys()),
                 ])
-
+            surveySources.reverse()
             return surveySources
 
         else:

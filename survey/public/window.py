@@ -22,8 +22,9 @@ class Window(QMainWindow):
         self.central = Central(self)
         self.setCentralWidget(self.central)
 
-        self.setMinimumSize(820, 800)
+        self.setMinimumSize(820, 900)
         self.setStyleSheet(getStyleSheet())
+        self.showMaximized()
 
         self.objectNameChanged.connect(self.handleObjectNameChange)
 

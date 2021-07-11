@@ -1,6 +1,6 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import QWidget, QLabel, QPushButton, QHBoxLayout
 
 
 NEW_ICON_PATH = "images/survey-new.png"
@@ -45,8 +45,5 @@ class Title(QWidget):
         self.setLayout(layout)
 
     def handleButtonTitleClick(self):
-        try:
-            self.central.realtimeDB.setSurveyView(self.central.clientId, self.uuid)
-            self.central.mainForm.navBar.setSurveyWidget(self.uuid)
-        except Exception as e:
-            print(e)
+        self.central.realtimeDB.setSurveyView(self.central.clientId, self.uuid)
+        self.central.mainForm.navBar.setSurveyWidget(self.uuid)

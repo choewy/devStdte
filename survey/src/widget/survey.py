@@ -1,9 +1,10 @@
 from PyQt5.QtCore import Qt, QSize
-from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtGui import QPixmap, QIcon, QFontMetricsF
 from PyQt5.QtWidgets import QWidget, QPushButton, QHBoxLayout, QLabel, QLineEdit, QTextEdit, QVBoxLayout, QScrollArea, \
-    QGroupBox, QFormLayout, QAbstractSlider
+    QGroupBox, QFormLayout
 from src.widget.answer import Answer
 from src.widget.header import Header
+
 
 ENCODE_STATUS = {
     0: "종료",
@@ -36,6 +37,12 @@ class Survey(QWidget):
         self.textContents.setObjectName("SurveyText-contents")
         self.textContents.setReadOnly(True)
 
+        font = self.textContents.font()
+        fontMetrics = QFontMetricsF(font)
+        spaceWidth = fontMetrics.width(' ')
+
+        self.textContents.setTabStopDistance(spaceWidth * 4)
+
         layoutLeft = QVBoxLayout()
         layoutLeft.addWidget(self.textTitle, 0)
         layoutLeft.addWidget(self.textContents, 10)
@@ -61,6 +68,12 @@ class Survey(QWidget):
         self.textAnswer.setObjectName("SurveyText-answer")
         self.textAnswer.setPlaceholderText("답글을 입력하세요.")
         self.textAnswer.textChanged.connect(self.handleTextAnswerChange)
+
+        font = self.textAnswer.font()
+        fontMetrics = QFontMetricsF(font)
+        spaceWidth = fontMetrics.width(' ')
+
+        self.textAnswer.setTabStopDistance(spaceWidth * 4)
 
         self.buttonUpload = QPushButton()
         self.buttonUpload.setObjectName("SurveyButton-upload")

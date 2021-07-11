@@ -1,7 +1,5 @@
-from PyQt5.QtGui import QPixmap, QIcon
-from PyQt5.QtCore import Qt, QSize
-from PyQt5.QtWidgets import QWidget, QTableWidget, QAbstractItemView, QLabel, QVBoxLayout, QLineEdit, QPushButton, \
-    QTableWidgetItem, QHeaderView
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QWidget, QTableWidget, QAbstractItemView, QLabel, QVBoxLayout, QTableWidgetItem, QHeaderView
 
 from src.widget.title import Title
 

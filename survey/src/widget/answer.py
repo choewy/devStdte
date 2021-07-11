@@ -1,6 +1,6 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap, QIcon
-from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import QLabel, QPushButton
 from src.dialog.question import Question
 
 ANSWER_ICON_PATH = "images/survey-answer.png"
@@ -10,7 +10,7 @@ REMOVE_ICON_PATH = "images/answer-remove.png"
 class Answer(QLabel):
 
     def __init__(self, survey, key, answerSource):
-        QWidget.__init__(self)
+        QLabel.__init__(self)
         self.survey = survey
         self.key = key
 
